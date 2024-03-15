@@ -1,0 +1,34 @@
+
+ 
+CREATE TABLE IF NOT EXISTS task (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    points INTEGER NOT NULL,
+    description varchar(255) 
+);
+ 
+CREATE TABLE IF NOT EXISTS role (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+ 
+CREATE TABLE IF NOT EXISTS user (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    idRole INTEGER,
+    password TEXT NOT NULL,
+    birthDate DATETIME NOT NULL, 
+    FOREIGN KEY(idRole) REFERENCES role(id)
+);
+ 
+CREATE TABLE IF NOT EXISTS done (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idTask TEXT NOT NULL,
+    idUser INTEGER NOT NULL,
+    comment TEXT,
+    timeDone CURRENT_TIMESTAMP,
+    FOREIGN KEY(idUser) REFERENCES user(id),
+    FOREIGN KEY(idTask) REFERENCES task(id)
+);

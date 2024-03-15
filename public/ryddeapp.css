@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    padding: 1rem;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  
+  select {
+    padding: 0.5rem;
+    margin: 0.2rem;
+    font-size: 1rem;
+  }
+  
+  input {
+    font-size: 1rem;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  section {
+    margin-bottom: 1rem;
+  }
+  
+  button  {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .loginRegBtn {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: lightgrey;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 1em;
+  }
+  
+  #bar-chart {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .bar {
+    width: 20px;
+    height: 100px;
+    background-color: #4CAF50;
+    margin: 0 5px;
+    position: relative;
+  }
+  
+  .bar-label {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  td, th {
+    padding-right: 2em;
+  }
+
+  
+  #loginForm {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #registerForm {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #app {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .formx {
+    height: 200px !important;
+    padding-top: 1em !important;
+    padding-left: 2px;
+  }

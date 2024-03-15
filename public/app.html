@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Chore Tracker</title>
+  <link rel="stylesheet" href="./ryddeapp.css">
+</head>
+<body>
+  
+  <header>
+    <h1>Familien Prokastinere</h1>
+  </header>
+ 
+  <form id="select-task" action='/task-add-done' method="POST">
+    <label for="users">Familiemedlem:</label><select id="users" name = "user"></select>
+    <br>
+    <br>
+    <select id="tasks" title="taskid" name="taskid" placeholder="Velg oppgave"></select>
+    <button id="btnRegister" type = "submit">Registrer oppgave</button>
+    <br>
+      <!--<label for="comment"></label><input type="text"  placeholder = "Eventuell kommentar" name="comment" padding-top="10px" padding-bottom="10px"> -->
+  </form>
+  <br>
+  <br>
+    <section id="statistics">
+      <h2>Statistikk</h2>
+ 
+      <label for="year">År:</label>
+      <select id="year">
+        <!-- Year options will be populated using JavaScript -->
+      </select>
+      <label for="month">Måned:</label>
+      <select id="month">
+        <!-- Month options will be populated using JavaScript -->
+      </select>
+    </section>
+    <section>
+      <h2>Leaderboard</h2>
+      <div id ="leaderboard">
+      </div>
+
+      <hr>
+      <br>
+
+      <h2>Detaljer</h2>
+      <div id ="detail-report">
+      </div>
+    </section>
+  
+</div>
+
+
+  <script src="./ryddeapp.js"></script>
+</body>
+</html>

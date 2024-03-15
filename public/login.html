@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./ryddeapp.css">
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm" action='/login' method="POST">
+        <label for="username">Username:</label>
+        <input type="text" title="username" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" title="password" name="password">
+        <br>
+        <label for="familycode">Familiekode:</label>
+        <input type="text" title="famlycode" name="familycode">
+        <br><br>
+        <button type="submit" name="login">Login</button>
+    </form>
+
+    <h2 id="loginFeedback"></h2>
+    <form id = "registerForm" action='/register' method="POST">
+        <label for="username">Username:</label>
+        <input type="text" title="username" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" title="password" name="password">
+        <br>
+        <label for="familycode">Familiekode:</label>
+        <input type="text" title="familycode" name="familycode">
+        <br>
+        <label for="epost">Epost:</label>
+        <input type="mail" title="mail" name="epost">
+        <br>
+        <label for="mobile">Mobil:</label>
+        <input type="text" title="mobile" name="mobile">
+        <br>
+        <label for="role">Rolle:</label>
+        <input type="number" title="role" name="role">
+
+
+        <button type="submit" name="login">Register</button>
+    </form>
+    <div>
+      <button class = "loginRegBtn" id="btnLogin">Login</button>
+      <button class = "loginRegBtn" id="btnRegister">Register</button>
+  </div>
+  <script src="./ryddeappLogin.js"></script>  
+</body>
+</html>
