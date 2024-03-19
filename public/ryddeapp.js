@@ -84,6 +84,8 @@ async function fetchUsers() {
   try {
     const response = await fetch('/users')
 
+    console.log(response)
+
     users = await response.json()
     console.log(users)
     populateUsers(users)
@@ -93,16 +95,18 @@ async function fetchUsers() {
 }
 
 function populateUsers(users) {
-  usersSelect.innerHTML = ""
+  usersSelect.innerHTML = "";
   console.log(users)
   for (i = 0; i < users.length; i++) {
     const option = document.createElement("option")
     option.value = users[i].id;
-    option.textValue = `${users[i].username}`;
+    option.textContent = `${users[i].username}`;
     console.log(users[i]);
     usersSelect.appendChild(option);
   }
 }
+
+
 async function fetchCurrentUser() {
   try {
       const response = await fetch('/currentUser')

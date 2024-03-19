@@ -86,13 +86,13 @@ app.post('/register', (req, res) => {
 
 //app.use(checkLoggedIn); // Apply globally if needed, or selectively to certain routes
 
- function checkUserPassword(idFamily, username, password, ){
-    const sql = db.prepare('SELECT user.id as userid, username, roles.role as role, password FROM user inner join roles on user.idrole = roles.id   WHERE username  = ? and idFamily = ?');
+ function checkUserPassword(idFamily, username, password){
+    const sql = db.prepare('SELECT users.id as userid, username, roles.role as role, password FROM users inner join roles on users.idrole = roles.id WHERE username = ? and idFamily = ?');
     let user = sql.get(username, idFamily);
     if (user && bcrypt.compareSync(password, user.password)) {
         return user 
     } else {
-        null;
+        return null;
     }
 }
 
