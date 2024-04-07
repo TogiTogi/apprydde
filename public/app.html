@@ -13,44 +13,55 @@
   </header>
  
   <form id="select-task" action='/task-add-done' method="POST">
-    <label for="users">Familiemedlem:</label><select id="users" name = "user"></select>
+    <h3>Registrer oppgave</h3>
+    <label for="users">Familiemedlem:</label>
+    <select id="users" name = "userid"></select>
+    <br>
+    <label for="tasks">Oppgave gjort: </label>
+    <select id="tasks" title="taskid" name="taskid" placeholder="Velg oppgave">Oppgave: </select>
+    <br>
+    <input id="comment" title="comment" placeholder="Kommentar (valgfritt)">
     <br>
     <br>
-    <select id="tasks" title="taskid" name="taskid" placeholder="Velg oppgave"></select>
-    <button id="btnRegister" type = "submit">Registrer oppgave</button>
+    <button id="btnRegister" type="submit">Registrer oppgave</button>
     <br>
-      <!--<label for="comment"></label><input type="text"  placeholder = "Eventuell kommentar" name="comment" padding-top="10px" padding-bottom="10px"> -->
   </form>
   <br>
   <br>
-    <section id="statistics">
-      <h2>Statistikk</h2>
- 
-      <label for="year">År:</label>
-      <select id="year">
-        <!-- Year options will be populated using JavaScript -->
-      </select>
-      <label for="month">Måned:</label>
-      <select id="month">
-        <!-- Month options will be populated using JavaScript -->
-      </select>
-    </section>
+  <form id="create-task" action='/task-create-done' method="POST">
+    <h3>Lag ny oppgave</h3>
+    <label for="nameTask">Oppgavenavn:</label>
+    <input id="nameTask" name="nameTask" required>
+    <br>
+    <label for="pointsTask">Oppgavepoeng:</label>
+    <input id="pointsTask" name="pointsTask"ask" required>
+    <br>
+    <label for="descTask">Oppgavebeskrivelse:</label>
+    <input id="descTask" name="descTask">
+    <br>
+    <br>
+    <button id="newTaskBtn" type="submit">Lag ny oppgave</button>
+  </form>
+  <br>
+    <hr>
+    <br>
     <section>
       <h2>Leaderboard</h2>
+      <div id="leaderboardButtons">
+        <button id="btnTotal">Totale poeng</button>
+        <button id="btnMonth">Denne måneden</button>
+      </div>
+      <br>
       <div id ="leaderboard">
       </div>
-
       <hr>
       <br>
-
-      <h2>Detaljer</h2>
       <div id ="detail-report">
       </div>
     </section>
-  
-</div>
-
-
+    <form id="logoutForm" action='/logout' method="GET">
+      <button id="btnLogut" type="submit">Log ut</button>
+    </form>
   <script src="./ryddeapp.js"></script>
 </body>
 </html>

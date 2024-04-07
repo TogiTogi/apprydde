@@ -1,6 +1,8 @@
 //Grabs id's from app.html
 const usersSelect = document.getElementById("users");
 const taskSelect = document.getElementById("tasks");
+const yearSelect = document.getElementById("year");
+const monthSelect = document.getElementById("month");
 const leaderboard = document.getElementById("leaderboard");
 
 
@@ -97,10 +99,12 @@ function populateUsers(users) {
   }
 }
 
-async function fetchLeaderboard(type) {
+async function fetchLeaderboard() {
   try {
-    const response = await fetch(`/leaderboard/${type}`)
+    const response = await fetch('/leaderboard')
+
     console.log("leaderboard", response)
+
     const leaderboardData = await response.json()
     console.log("leaderboard:", leaderboardData)
     populateLeaderboard(leaderboardData)
@@ -109,18 +113,14 @@ async function fetchLeaderboard(type) {
   }
 }
 
-// Populate leaderboard
 function populateLeaderboard(leaderboardData) {
   leaderboard.innerHTML = "";
-  for (i = 0; i < leaderboardData.length; i++) {
+  for (let i = 0; i < leaderboardData.length; i++) {
     const li = document.createElement("li")
     li.textContent = `${leaderboardData[i].username} (${leaderboardData[i].points} pts)`;
     leaderboard.appendChild(li);
   }
 }
-
-document.getElementById('btnTotal').addEventListener('click', () => fetchLeaderboard('total'));
-document.getElementById('btnMonth').addEventListener('click', () => fetchLeaderboard('month'));
 
 async function fetchCurrentUser() {
   try {
