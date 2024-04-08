@@ -95,7 +95,7 @@ app.post('/register', (req, res) => {
         req.session.userid = user.userid
 
         req.session.loggedIn = true
-        //res.redirect('/');
+        //res.redirect('/'); 
         // Pseudocode - Adjust according to your actual frontend framework or vanilla JS
         if (req.session.loggedIn) {
             res.send(true)
@@ -220,8 +220,12 @@ app.get('/leaderboard/month', checkLoggedIn, (req, res) => {
     res.send(rows);
 });
 
-app.get('/currentUser', checkLoggedIn,  (req, res) => {
-    res.send([req.session.userid, req.session.username, req.session.userrole]);
+app.get('/currentUser', checkLoggedIn,  (req, res) => {// This will log the userid to the console
+    console.log(`User ID: ${req.session.userid}`);
+    console.log(`Username: ${req.session.username}`);
+    console.log(`User Role: ${req.session.userrole}`);
+    console.log(`Family ID: ${req.session.idFamily}`);
+    res.send([req.session.userid, req.session.username, req.session.userrole, req.session.idFamily]);
 });
 
 

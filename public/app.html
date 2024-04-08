@@ -10,12 +10,17 @@
   
   <header>
     <h1>Familien Prokastinere</h1>
+    
   </header>
- 
+  <div id="loggedInAsDiv">
+    <p d="loggedInAs"></p>
+  </div>
+  <br>
+  <br>
   <form id="select-task" action='/task-add-done' method="POST">
     <h3>Registrer oppgave</h3>
     <label for="users">Familiemedlem:</label>
-    <select id="users" name = "userid"></select>
+    <select id="users" name="userid"></select>
     <br>
     <label for="tasks">Oppgave gjort: </label>
     <select id="tasks" title="taskid" name="taskid" placeholder="Velg oppgave">Oppgave: </select>

@@ -87,13 +87,15 @@ async function fetchUsers() {
   }
 }
 
-function populateUsers(users) {
+function populateUsers(users, currentUserIdFamily) {
   usersSelect.innerHTML = "";
   for (i = 0; i < users.length; i++) {
-    const option = document.createElement("option")
-    option.value = users[i].id;
-    option.textContent = `${users[i].username}`;
-    usersSelect.appendChild(option);
+    if (users[i].idFamily === currentUserIdFamily) {
+      const option = document.createElement("option")
+      option.value = users[i].id;
+      option.textContent = `${users[i].username}`;
+      usersSelect.appendChild(option);
+    }
   }
 }
 
@@ -149,8 +151,34 @@ async function fetchCurrentUser() {
       
       let user = await response.json()
       thisUser = new User(user[0], user[1])
+      document.getElementById('loggedInAs').innerText = thisUser.username;
       console.log(thisUser)
   } catch (error) {
       console.log('Failed to fetch thisUser:', error);
+  }
+}
+fetch('/currentUser')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+//Funker ikke, vet ikke hvorfor
+async function fetchCurrentUserRole() {
+  try {
+      const response = await fetch('/currentUser')
+      
+      let user = await response.json()
+      return user[2]; // user[2] is the idRole
+  } catch (error) {
+      console.log('Failed to fetch currentUser:', error);
+  }
+}
+
+async function hideElementsBasedOnRole() {
+  const idRole = await fetchCurrentUserRole();
+
+  if (idRole == barn || idRole == 2) {
+    document.getElementById('select-task').style.display = 'none';
+    document.getElementById('create-task').style.display = 'none';
   }
 }
