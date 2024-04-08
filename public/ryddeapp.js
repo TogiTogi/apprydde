@@ -162,6 +162,7 @@ fetch('/currentUser')
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
 
+  
 //Funker ikke, vet ikke hvorfor
 async function fetchCurrentUserRole() {
   try {
@@ -176,8 +177,9 @@ async function fetchCurrentUserRole() {
 
 async function hideElementsBasedOnRole() {
   const idRole = await fetchCurrentUserRole();
-
-  if (idRole == barn || idRole == 2) {
+  console.log(`idRole: ${idRole}`); // Log the value of idRole
+  
+  if (idRole == 'barn' || idRole == 2) {
     document.getElementById('select-task').style.display = 'none';
     document.getElementById('create-task').style.display = 'none';
   }
