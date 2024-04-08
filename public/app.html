@@ -20,7 +20,7 @@
     <label for="tasks">Oppgave gjort: </label>
     <select id="tasks" title="taskid" name="taskid" placeholder="Velg oppgave">Oppgave: </select>
     <br>
-    <input id="comment" title="comment" placeholder="Kommentar (valgfritt)">
+    <input id="comment" name="comment" title="comment" placeholder="Kommentar (valgfritt)">
     <br>
     <br>
     <button id="btnRegister" type="submit">Registrer oppgave</button>
@@ -56,9 +56,11 @@
       </div>
       <hr>
       <br>
-      <div id ="detail-report">
-      </div>
     </section>
+    <h2>Dine fullførte oppgaver</h2>
+    <div id="yourTasksDone">
+      <div id="History"></div>
+    </div>
     <form id="logoutForm" action='/logout' method="GET">
       <button id="btnLogut" type="submit">Log ut</button>
     </form>

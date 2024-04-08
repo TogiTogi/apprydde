@@ -122,6 +122,27 @@ function populateLeaderboard(leaderboardData) {
 document.getElementById('btnTotal').addEventListener('click', () => fetchLeaderboard('total'));
 document.getElementById('btnMonth').addEventListener('click', () => fetchLeaderboard('month'));
 
+async function fetchCompletedTasks() {
+  try {
+    const response = await fetch('/tasks/done');
+    const tasks = await response.json();
+    populateCompletedTasks(tasks);
+  } catch (error) {
+    console.log('Failed to fetch completed tasks:', error);
+  }
+}
+
+// Populate completed tasks
+function populateCompletedTasks(tasks) {
+  const yourTasksDone = document.getElementById('yourTasksDone');
+  yourTasksDone.innerHTML = ""; // Clear the div
+  for (let task of tasks) {
+    const li = document.createElement("li");
+    li.textContent = task.name;
+    yourTasksDone.appendChild(li);
+  }
+}
+
 async function fetchCurrentUser() {
   try {
       const response = await fetch('/currentUser')

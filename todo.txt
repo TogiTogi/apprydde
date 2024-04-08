@@ -1,3 +1,2 @@
-Add month/year on leaderboard
-
 Make so you can only see people with the same family id as you
+Admin

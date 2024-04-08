@@ -31,13 +31,13 @@ app.use(express.static(staticPath));
 
 app.post('/task-add-done', (req, res) => {
     console.log(req.body)
-    addTaskDone(req.body.userid, req.body.taskid, req.body.familyid)
+    addTaskDone(req.body.userid, req.body.taskid, req.body.comment)
     res.sendFile(path.join(__dirname, "public/app.html"));
 });
 
-function addTaskDone(userid, taskid){
-    const sql = db.prepare('insert into done (iduser, idtask) values (?, ?)')
-    sql.run(userid, taskid)
+function addTaskDone(userid, taskid, comment){
+    const sql = db.prepare('insert into done (iduser, idtask, comment) values (?, ?, ?)')
+    sql.run(userid, taskid, comment)
 }
 
 app.post('/task-create-done', (req, res) => {
@@ -169,6 +169,16 @@ app.get('/tasks', checkLoggedIn, (req, res) => {
     res.send(rows);
 });
 
+
+app.get('/tasks/done', checkLoggedIn, (req, res) => {
+    const sql = db.prepare('SELECT task.name FROM done\n'
+    + 'inner join task on done.idTask = task.id\n'
+    + 'WHERE done.idUser = ?\n'
+    + 'ORDER BY done.date DESC', req.user.id);
+    let rows = sql.all();
+    res.send(rows);
+});
+
 app.get('/users', checkLoggedIn, (req, res) => {
     
     const sql = db.prepare('select id, username from users')
@@ -179,13 +189,15 @@ app.get('/users', checkLoggedIn, (req, res) => {
 });
 
 app.get('/leaderboard/total', checkLoggedIn, (req, res) => {
+    const loggedInUserId = req.session.userid; // Assuming req.user.id contains the id of the logged in user
     const sql = db.prepare('SELECT users.username, SUM(points) AS points FROM done\n'
     + 'inner join task on done.idTask = task.id\n'
     + 'inner join users on done.idUser = users.id\n\n'
+    + 'WHERE users.idFamily = (SELECT idFamily FROM users WHERE id = ?)\n'
     + 'GROUP BY users.username\n'
     + 'ORDER BY points DESC')
     console.log(sql)
-    let rows = sql.all()
+    let rows = sql.all(loggedInUserId)
     console.log("rows.length", rows.length)
     res.send(rows);
 });
@@ -194,15 +206,16 @@ app.get('/leaderboard/total', checkLoggedIn, (req, res) => {
 app.get('/leaderboard/month', checkLoggedIn, (req, res) => {
     const currentDate = new Date();
     const currentYearMonth = `${currentDate.getFullYear()}-${("0" + (currentDate.getMonth() + 1)).slice(-2)}`; // Format as YYYY-MM
+    const loggedInUserId = req.session.userid; // Get the id of the logged in user from the session
 
     const sql = db.prepare('SELECT users.username, SUM(points) AS points FROM done\n'
     + 'inner join task on done.idTask = task.id\n'
     + 'inner join users on done.idUser = users.id\n'
-    + 'WHERE SUBSTR(done.dt, 1, 7) = ?\n'
+    + 'WHERE SUBSTR(done.dt, 1, 7) = ? AND users.idFamily = (SELECT idFamily FROM users WHERE id = ?)\n'
     + 'GROUP BY users.username\n'
     + 'ORDER BY points DESC')
     console.log(sql)
-    let rows = sql.all(currentYearMonth); // Pass the parameter here
+    let rows = sql.all(currentYearMonth, loggedInUserId); // Pass the parameter here
     console.log("rows.length", rows.length)
     res.send(rows);
 });
