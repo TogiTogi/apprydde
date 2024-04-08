@@ -220,12 +220,18 @@ app.get('/leaderboard/month', checkLoggedIn, (req, res) => {
     res.send(rows);
 });
 
+function getFamilyId(idUser) {
+    const sql = db.prepare('SELECT idFamily FROM users WHERE id = ?');
+    return sql.get(idUser).idFamily;
+}
+
 app.get('/currentUser', checkLoggedIn,  (req, res) => {// This will log the userid to the console
     console.log(`User ID: ${req.session.userid}`);
     console.log(`Username: ${req.session.username}`);
     console.log(`User Role: ${req.session.userrole}`);
-    console.log(`Family ID: ${req.session.idFamily}`);
-    res.send([req.session.userid, req.session.username, req.session.userrole, req.session.idFamily]);
+   // console.log(`Family ID: ${req.session.idFamily}`);
+   const familyId = getFamilyId(req.session.userid);
+    res.send([req.session.userid, req.session.username, req.session.userrole, familyId]);
 });
 
 

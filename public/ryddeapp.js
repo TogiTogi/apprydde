@@ -28,6 +28,7 @@ let thisUser = null
 async function main() {
   
   await fetchData()
+  hideElementsBasedOnRole()
 }
 
 
